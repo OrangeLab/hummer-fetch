@@ -1,6 +1,6 @@
 {
-  "name": "lib-ts-template",
-  "version": "0.0.1",
+  "name": "@hummer/hummer-fetch",
+  "version": "0.0.0",
   "license": "ISC",
   "author": "duanlikang",
   "main": "dist/index.js",
