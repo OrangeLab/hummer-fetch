@@ -1,27 +1,28 @@
-import {Url} from './types/index'
-
 const INTERNAL_KEY = 'INTERNAL_REQUEST'
 
 export interface RequestOptions {
   headers: any,
   method: string,
-  url: string
+  url: string,
+  body: any
 }
 
 export class Request{
+  private [INTERNAL_KEY]: any
   constructor(options:RequestOptions){
     let method = options.method || 'GET'
-    let headers = options.headers
+    let headers = {
+      "Content-Type": "application/json",
+      ...options.headers
+    }
     let url = options.url
+    let body = options.body || {}
     this[INTERNAL_KEY] = {
       headers: headers,
       method: method,
-      url: url
+      url: url,
+      body: body
     }
-  }
-
-  set [INTERNAL_KEY](object: any){
-    this[INTERNAL_KEY] = object
   }
 
   get url(){
@@ -36,14 +37,14 @@ export class Request{
     return this[INTERNAL_KEY].headers
   }
 
+  get body(){
+    let body = this[INTERNAL_KEY].body
+    // TODO iOS 这边要求传递对象，后期 iOS 重构后进行改造
+    return typeof body === 'string'? JSON.parse(body) : body
+  }
+
   clone(){
     return new Request(this)
   }
-}
 
-export function getRequestOptions(resource: Url, options: any):RequestOptions{
-  return {
-    url: resource,
-    ...options
-  }
 }

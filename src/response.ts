@@ -6,26 +6,25 @@ export enum ResponseCode {
 
 export interface ResponseOptions {
   status: number,
-  statusText: string,
+  statusText?: string,
   url: string,
   headers: any
 }
 
 export class Response{
-  constructor(options:ResponseOptions){
+  private [INTERNAL_KEY]: any
+  private body:any
+  constructor(body: any, options:ResponseOptions){
     let status = ResponseCode.SUCCESS
     let url = options.url
 
+    this.body = body
     this[INTERNAL_KEY] = {
       status,
       statusText: options.statusText || '',
       headers: options.headers,
       url: url
     }
-  }
-
-  set [INTERNAL_KEY](object: any){
-    this[INTERNAL_KEY] = object
   }
 
   get url(){
@@ -48,11 +47,18 @@ export class Response{
     return this[INTERNAL_KEY].statusText
   }
   
-  clone(){
-    return new Response(this)
+  protected transformResponseBody(body:any){
+    return body
   }
 
-  async json(){
-
+  json(){
+    return new Promise((resolve, reject) => {
+      try{
+        let data = this.transformResponseBody(this.body)
+        resolve(data)
+      }catch(err){
+        reject(err)
+      }
+    })
   }
 }

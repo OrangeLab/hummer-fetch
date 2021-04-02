@@ -1,3 +1,6 @@
+/**
+ * 浏览器标准 Fetch 实现，作为 API 参考
+ */
 var global =
   (typeof globalThis !== 'undefined' && globalThis) ||
   (typeof self !== 'undefined' && self) ||
