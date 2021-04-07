@@ -1,6 +1,7 @@
 import {Response} from './response'
 import {Url, FetchOptions} from './types/index'
 import {HummerRequest} from './hummer/index'
+declare const __GLOBAL__:any;
 
 export {HummerRequest as Request, Response}
 
@@ -22,3 +23,6 @@ export function fetch(resource: Url | HummerRequest, _options?:FetchOptions):Pro
     })
   })
 }
+
+// 全局注册
+__GLOBAL__.fetch = fetch
