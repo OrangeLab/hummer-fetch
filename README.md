@@ -12,7 +12,6 @@ Fetch Api For Hummer Env。适用于 Hummer Env 环境的 Fetch API 实现。
 
 ### 使用
 #### 全局引入
-在 entry.js 中引用
 > 原则上只要保证在使用 fetch api的前面进行 `hummer-fetch`库的引入即可。推荐在 entry.js 头部进行引用。
 ```
 // entry.js
