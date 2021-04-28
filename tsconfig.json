@@ -4,7 +4,7 @@
     "outDir": "dist",
     "sourceMap": false,
     "target": "es6",
-    "module": "commonjs",
+    "module": "ES6",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "declaration": true,
